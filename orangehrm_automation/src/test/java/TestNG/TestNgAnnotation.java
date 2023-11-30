@@ -25,9 +25,18 @@ public class TestNgAnnotation {
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
     }
-    @AfterTest
+    @Test
+    public  void logOut(){
+        CommonFunction.elementToBeVisible(driver,By.xpath("//li[@class='oxd-userdropdown']"));
+        driver.findElement(By.xpath("//li[@class='oxd-userdropdown']")).click();
+        CommonFunction.elementToBeVisible(driver,By.xpath("//ul[@class='oxd-dropdown-menu']/li[4]"));
+        driver.findElement(By.xpath("//ul[@class='oxd-dropdown-menu']/li[4]")).click();
+    }
+
+    @Test
     public void tearDown(){
         driver.quit();
     }
+
 
 }
