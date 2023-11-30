@@ -37,7 +37,7 @@ public class CommonFunction {
 
   public static void elementToBeVisible(WebDriver driver, By by){
       Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-      wait.until(ExpectedConditions.visibilityOf(driver.findElement(by)));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 
   }
 

@@ -4,6 +4,7 @@ import common.CommonFunction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -17,11 +18,16 @@ public class TestNgAnnotation {
     }
     @Test
     public void logIn() throws InterruptedException {
-        Thread.sleep(2000);
-        CommonFunction.elementToBeVisible(driver,(By.name("username")));
+        //Thread.sleep(2000);
+        CommonFunction.elementToBeVisible(driver,By.name("username"));
         driver.findElement(By.name("username")).sendKeys("Admin");
         driver.findElement(By.name("password")).sendKeys("admin123");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+    }
+    @AfterTest
+    public void tearDown(){
+        driver.quit();
     }
 
 }
