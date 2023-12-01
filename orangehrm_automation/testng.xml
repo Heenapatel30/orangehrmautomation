@@ -2,7 +2,8 @@
 <suite name="Suite1" verbose="1">
     <test name ="sanity">
         <classes>
-            <class name = "TestNG.TestNgAnnotation"></class>
+            <class name="TestNG.TestNgAnnotation"/>
+            <class name="TestNG.PimModule"/>
         </classes>
     </test>
 </suite>
