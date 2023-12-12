@@ -4,6 +4,7 @@
         <classes>
             <class name="TestNG.TestNgAnnotation"/>
             <class name="TestNG.PimModule"/>
+
         </classes>
     </test>
 </suite>
