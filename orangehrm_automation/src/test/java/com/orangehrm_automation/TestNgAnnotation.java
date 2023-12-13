@@ -1,4 +1,4 @@
-package TestNG;
+package com.orangehrm_automation;
 
 import common.CommonFunction;
 import org.openqa.selenium.By;

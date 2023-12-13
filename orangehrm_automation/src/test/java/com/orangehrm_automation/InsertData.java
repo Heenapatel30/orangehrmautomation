@@ -1,4 +1,4 @@
-package TestNG;
+package com.orangehrm_automation;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -8,8 +8,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -55,4 +53,5 @@ public class InsertData {
     public void excelVerify() throws IOException {
         insertExcelData();
     }
+
 }

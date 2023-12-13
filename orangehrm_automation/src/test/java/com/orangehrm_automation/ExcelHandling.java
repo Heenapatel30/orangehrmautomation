@@ -1,44 +1,43 @@
-package TestNG;
+package com.orangehrm_automation;
 
-import common.CommonFunction;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ExcelHandling {
 
     WebDriver driver;
+    Workbook workbook;
 
-    public String getFileExtension(String filePath){
+
+    public String getFileExtension(String filePath) {
 
         return filePath.substring(filePath.indexOf("."));
     }
 
-/*   */
-
+    @Test(dataProvider = "getExcelData")
+    public void verifyLogin (String username, String password) {
+        System.out.println(username + " : " + password);
+    }
     @DataProvider
     public Object[][] getExcelData() throws IOException {
-        Workbook workbook;
-        String filePath = "D:\\selenium\\data.xlsx";
+        String filePath = "D:\\selenium\\Data.xlsx";
 
         String extension = getFileExtension(filePath);
         System.out.println(extension);
 
         FileInputStream inputStream = new FileInputStream(filePath);
 
-        if (extension.equals(".xlsx")){
+        if (extension.equals(".xlsx")) {
             workbook = new XSSFWorkbook(inputStream);
         } else {
             workbook = new HSSFWorkbook(inputStream);
@@ -50,28 +49,27 @@ public class ExcelHandling {
 
         int totalColumns = sheet.getRow(0).getPhysicalNumberOfCells();
 
-        Object[][] array = new Object[totalRows-1][totalColumns];
+        Object[][] array = new Object[totalRows - 1][totalColumns];
 
 
+        for (int i = 1; i < totalRows; i++) {
 
-            for (int i = 1; i < totalRows; i++) {
+            Row row = sheet.getRow(i);
 
-                Row row = sheet.getRow(i);
+            for (int j = 0; j < totalColumns; j++) {
 
-                for (int j = 0; j < totalColumns; j++) {
-
-                    Cell cell = row.getCell(j);
-                    String value = null;
-                    if (cell != null) {
-                        value = cell.getStringCellValue();
-                    }
-                    array[i - 1][j] = value;
-                    System.out.print(value + " ");
+                Cell cell = row.getCell(j);
+                String value = null;
+                if (cell != null) {
+                    value = cell.getStringCellValue();
                 }
-                System.out.println();
+                array[i - 1][j] = value;
+                //System.out.print(value + " ");
             }
-            workbook.close();
-            inputStream.close();
+           // System.out.println();
+        }
+        workbook.close();
+        inputStream.close();
 
 
         return array;
