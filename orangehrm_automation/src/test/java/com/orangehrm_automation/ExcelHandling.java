@@ -26,10 +26,11 @@ public class ExcelHandling {
 
     @Test(dataProvider = "getExcelData")
     public void verifyLogin (String username, String password) {
-        System.out.println(username + " : " + password);
+
+        System.out.println(username + "  " + password);
     }
     @DataProvider
-    public Object[][] getExcelData() throws IOException {
+    public  Object[][] getExcelData() throws IOException {
         String filePath = "D:\\selenium\\Data.xlsx";
 
         String extension = getFileExtension(filePath);
@@ -47,23 +48,24 @@ public class ExcelHandling {
 
         int totalRows = sheet.getPhysicalNumberOfRows();
 
+
         int totalColumns = sheet.getRow(0).getPhysicalNumberOfCells();
 
-        Object[][] array = new Object[totalRows - 1][totalColumns];
+        Object[][] array = new Object[totalRows-1][totalColumns];
 
 
-        for (int i = 1; i < totalRows; i++) {
+        for (int i = 1; i<totalRows; i++) {
 
             Row row = sheet.getRow(i);
 
-            for (int j = 0; j < totalColumns; j++) {
+            for (int j = 0; j<totalColumns; j++) {
 
                 Cell cell = row.getCell(j);
                 String value = null;
                 if (cell != null) {
                     value = cell.getStringCellValue();
                 }
-                array[i - 1][j] = value;
+                array[i-1][j] = value;
                 //System.out.print(value + " ");
             }
            // System.out.println();
