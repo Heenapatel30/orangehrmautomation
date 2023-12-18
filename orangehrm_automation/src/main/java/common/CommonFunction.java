@@ -1,16 +1,14 @@
 package common;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
@@ -39,6 +37,19 @@ public class CommonFunction {
       Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10));
       wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 
+  }
+
+  public static void fluentWait(WebDriver driver,By by){
+
+      Wait<WebDriver> fluentWait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20))
+              .pollingEvery(Duration.ofSeconds(2))
+              .ignoring(NoSuchElementException.class)
+      ;
+
+      fluentWait.until((webDriver)->{
+          System.out.println("Checking for Element");
+          return webDriver.findElement(by);
+      });
   }
 
 }

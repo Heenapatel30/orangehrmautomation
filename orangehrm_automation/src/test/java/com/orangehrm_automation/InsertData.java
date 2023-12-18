@@ -204,4 +204,54 @@ public class InsertData {
 
     }
 
+    public void insertBusData(Object[][] data) throws IOException {
+        String filePath = "D:\\selenium\\RedBusData.xlsx";
+
+        FileOutputStream outputStream = new FileOutputStream(filePath);
+
+        String fileExtension = getFileExtension(filePath);
+        //System.out.println(fileExtension);
+
+        if (fileExtension.equals(".xlsx")){
+            workbook = new XSSFWorkbook();
+        } else {
+            workbook = new HSSFWorkbook();
+        }
+
+        Sheet sheet = workbook.createSheet("TestData");
+
+        for (int i = 0; i < data.length ; i++) {
+            Row  row = sheet.createRow(i);
+
+            for (int j = 0; j <1; j++) {
+                Object empObj = data[i][j];
+
+                List<String> empData = (List<String>)empObj;
+
+                for (int k = 0; k <empData.size() ; k++) {
+                    Cell cell = row.createCell(k);
+
+                    String value = empData.get(k);
+
+                    if (value != null){
+                        cell.setCellValue(value);
+                    }else {
+                        cell.setCellValue("");
+                    }
+                }
+
+            }
+        }
+
+        workbook.write(outputStream);
+
+        workbook.close();
+
+        outputStream.flush();
+
+        outputStream.close();
+
+
+    }
+
 }
