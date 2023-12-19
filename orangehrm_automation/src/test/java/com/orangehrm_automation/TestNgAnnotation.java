@@ -1,18 +1,22 @@
 package com.orangehrm_automation;
 
 import common.CommonFunction;
+import common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 
 public class TestNgAnnotation {
-    WebDriver driver = CommonFunction.launchBrowser("chrome");
+    WebDriver driver;
+    PropertyHandling propertyHandling;
     @BeforeClass
     public void setUp(){
+        propertyHandling = new PropertyHandling();
         System.out.println("this is setup method");
+        driver=CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
         driver.manage().window().maximize();
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.get(propertyHandling.getProperty("url"));
 
     }
     @Test
@@ -20,8 +24,8 @@ public class TestNgAnnotation {
         //Thread.sleep(2000);
         System.out.println("this is login method");
         CommonFunction.elementToBeVisible(driver,By.name("username"));
-        driver.findElement(By.name("username")).sendKeys("Admin");
-        driver.findElement(By.name("password")).sendKeys("admin123");
+        driver.findElement(By.name("username")).sendKeys(propertyHandling.getProperty("username"));
+        driver.findElement(By.name("password")).sendKeys(propertyHandling.getProperty("password"));
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
     }

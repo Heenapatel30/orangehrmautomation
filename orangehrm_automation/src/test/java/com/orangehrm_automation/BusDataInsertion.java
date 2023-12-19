@@ -1,6 +1,7 @@
 package com.orangehrm_automation;
 
 import common.CommonFunction;
+import common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,10 +18,12 @@ import java.util.List;
 public class BusDataInsertion {
 
     WebDriver driver;
+    PropertyHandling propertyHandling;
 
     @BeforeTest
     public void setUp() throws InterruptedException {
-        driver = CommonFunction.launchBrowser("chrome");
+        propertyHandling = new PropertyHandling();
+        driver = CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
         driver.manage().window().maximize();
         driver.navigate().to("https://www.redbus.in/");
         driver.findElement(By.xpath("//input[@id='src']")).sendKeys("pune");
@@ -48,7 +51,6 @@ public class BusDataInsertion {
     @DataProvider
     public Object[][] getBusDetail() throws InterruptedException {
         CommonFunction.elementToBeVisible(driver,By.xpath("//div[@id='result-section']//div/ul/div"));
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50000));
         Thread.sleep(50000);
 
         List<WebElement> rows = driver.findElements(By.xpath("//div[@id='result-section']//div/ul/div"));
@@ -65,11 +67,7 @@ public class BusDataInsertion {
                     String dataXpath = "//div[@id='result-section']//div/ul/div" + "[" + i + "]" + "//li/div/div[1]/div[1]/div[" + j + "]/div[1]";
                     CommonFunction.fluentWait(driver,By.xpath(dataXpath));
                     value = driver.findElement(By.xpath(dataXpath)).getText();
-                }/*else {
-                    String dataXpath = "//div[@id='result-section']//div/ul/div" + "[" + i + "]" + "//li/div/div[1]/div[1]/div[" + j + "]/div[1]"+"/div/span";
-                    CommonFunction.fluentWait(driver,By.xpath(dataXpath));
-                     value = driver.findElement(By.xpath(dataXpath)).getText();
-                }*/
+                }
                 data.add(value);
             }
             busDataObject[i-1][0] = data;

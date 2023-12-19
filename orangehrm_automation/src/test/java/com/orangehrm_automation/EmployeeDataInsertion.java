@@ -1,6 +1,7 @@
 package com.orangehrm_automation;
 
 import common.CommonFunction;
+import common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,14 +18,16 @@ import java.util.Map;
 public class EmployeeDataInsertion {
 
     WebDriver driver;
+    PropertyHandling propertyHandling;
     @BeforeClass
     public void setUp() throws InterruptedException {
-        driver=CommonFunction.launchBrowser("chrome");
+        propertyHandling = new PropertyHandling();
+        driver=CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
         driver.manage().window().maximize();
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.get(propertyHandling.getProperty("url"));
         CommonFunction.elementToBeVisible(driver, By.name("username"));
-        driver.findElement(By.name("username")).sendKeys("Admin");
-        driver.findElement(By.name("password")).sendKeys("admin123");
+        driver.findElement(By.name("username")).sendKeys(propertyHandling.getProperty("username"));
+        driver.findElement(By.name("password")).sendKeys(propertyHandling.getProperty("password"));
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         CommonFunction.elementToBeVisible(driver,By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]"));
         driver.findElement(By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]")).click();
