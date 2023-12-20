@@ -5,7 +5,6 @@ import common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,10 +12,16 @@ public class PimModule {
 
     WebDriver driver;
     PropertyHandling propertyHandling;
+
+    PimModulePage pimModulePage;
+
+    LogInPage logInPage;
     @BeforeClass
     public void setUp(){
         propertyHandling = new PropertyHandling();
         driver =  CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
+        logInPage = new LogInPage();
+        pimModulePage = new PimModulePage();
         driver.manage().window().maximize();
         driver.get(propertyHandling.getProperty("url"));
     }
@@ -24,26 +29,26 @@ public class PimModule {
     public void logIn() throws InterruptedException {
         //Thread.sleep(2000);
         //System.out.println("this is login method");
-       CommonFunction.elementToBeVisible(driver,By.name("username"));
-        driver.findElement(By.name("username")).sendKeys(propertyHandling.getProperty("username"));
-        driver.findElement(By.name("password")).sendKeys(propertyHandling.getProperty("password"));
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+       CommonFunction.elementToBeVisible(driver,logInPage.username);
+        driver.findElement(logInPage.username).sendKeys(propertyHandling.getProperty("username"));
+        driver.findElement(logInPage.password).sendKeys(propertyHandling.getProperty("password"));
+        driver.findElement(logInPage.logInButton).click();
     }
 
     @Test
     public void pimModuleClick() throws InterruptedException {
-        CommonFunction.elementToBeVisible(driver,By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]"));
-        driver.findElement(By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]")).click();
-        CommonFunction.fluentWait(driver,By.xpath("//nav[@class='oxd-topbar-body-nav']/ul/li[3]"));
-        driver.findElement(By.xpath("//nav[@class='oxd-topbar-body-nav']/ul/li[3]")).click();
-        CommonFunction.fluentWait(driver,By.name("firstName"));
-        driver.findElement(By.name("firstName")).sendKeys("abcxyz");
-        driver.findElement(By.name("lastName")).sendKeys("patil");
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        CommonFunction.elementToBeVisible(driver,pimModulePage.pimModule);
+        driver.findElement(pimModulePage.pimModule).click();
+        CommonFunction.fluentWait(driver,pimModulePage.addEmployeeButton);
+        driver.findElement(pimModulePage.addEmployeeButton).click();
+        CommonFunction.fluentWait(driver,pimModulePage.firstName);
+        driver.findElement(pimModulePage.firstName).sendKeys("abcxyz");
+        driver.findElement(pimModulePage.lastName).sendKeys("patil");
+        driver.findElement(pimModulePage.submitButton).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//nav[@class='oxd-topbar-body-nav']/ul/li[2]")).click();
-        CommonFunction.fluentWait(driver,By.xpath("//ul[@class='oxd-main-menu']/li[8]"));
-        driver.findElement(By.xpath("//ul[@class='oxd-main-menu']/li[8]")).click();
+        driver.findElement(pimModulePage.employeeListButton).click();
+        CommonFunction.fluentWait(driver,pimModulePage.dashBoard);
+        driver.findElement(pimModulePage.dashBoard).click();
 
     }
 

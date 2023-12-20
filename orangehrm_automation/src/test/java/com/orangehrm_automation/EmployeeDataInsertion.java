@@ -19,16 +19,18 @@ public class EmployeeDataInsertion {
 
     WebDriver driver;
     PropertyHandling propertyHandling;
+    LogInPage logInPage;
     @BeforeClass
     public void setUp() throws InterruptedException {
         propertyHandling = new PropertyHandling();
         driver=CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
         driver.manage().window().maximize();
+        logInPage = new LogInPage();
         driver.get(propertyHandling.getProperty("url"));
-        CommonFunction.elementToBeVisible(driver, By.name("username"));
-        driver.findElement(By.name("username")).sendKeys(propertyHandling.getProperty("username"));
-        driver.findElement(By.name("password")).sendKeys(propertyHandling.getProperty("password"));
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        CommonFunction.elementToBeVisible(driver, logInPage.username);
+        driver.findElement(logInPage.username).sendKeys(propertyHandling.getProperty("username"));
+        driver.findElement(logInPage.password).sendKeys(propertyHandling.getProperty("password"));
+        driver.findElement(logInPage.logInButton).click();
         CommonFunction.elementToBeVisible(driver,By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]"));
         driver.findElement(By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]")).click();
         Thread.sleep(2000);
