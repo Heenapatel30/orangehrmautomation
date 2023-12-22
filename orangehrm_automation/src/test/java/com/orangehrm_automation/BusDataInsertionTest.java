@@ -32,6 +32,8 @@ public class BusDataInsertionTest {
         driver.findElement(By.xpath("//input[@id='dest']")).sendKeys("mumbai");
         CommonFunction.elementToBeVisible(driver,By.xpath("//ul[starts-with(@class,'sc-dnqmqq')]/li[1]"));
         driver.findElement(By.xpath("//ul[starts-with(@class,'sc-dnqmqq')]/li[1]")).click();
+        Thread.sleep(3000);
+
 
         driver.findElement(By.xpath("//div[@class='labelCalendarContainer']")).click();
         Thread.sleep(3000);
