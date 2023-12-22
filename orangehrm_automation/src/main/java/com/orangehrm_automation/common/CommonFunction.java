@@ -1,4 +1,4 @@
-package common;
+package com.orangehrm_automation.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -39,6 +39,11 @@ public class CommonFunction {
 
   }
 
+  public static void elementToBeVisibleByElement(WebDriver driver,WebElement element){
+      Wait<WebDriver> wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+      wait.until(ExpectedConditions.visibilityOf(element));
+  }
+
   public static void fluentWait(WebDriver driver,By by){
 
       Wait<WebDriver> fluentWait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20))
@@ -51,6 +56,8 @@ public class CommonFunction {
           return webDriver.findElement(by);
       });
   }
+
+
 
 }
 

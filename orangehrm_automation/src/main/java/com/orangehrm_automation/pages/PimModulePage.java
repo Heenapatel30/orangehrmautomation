@@ -1,8 +1,21 @@
-package com.orangehrm_automation;
+package com.orangehrm_automation.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class PimModulePage {
+    WebDriver driver;
+
+    public PimModulePage(WebDriver driver){
+        this.driver = driver;
+
+        PageFactory.initElements(driver,this);
+    }
 
     public By pimModule = By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]");
 
@@ -18,5 +31,9 @@ public class PimModulePage {
 
     public By dashBoard = By.xpath("//ul[@class='oxd-main-menu']/li[8]");
 
-    public By table = By.xpath("//div[@class='oxd-table-card']");
+    //public By table = By.xpath("//div[@class='oxd-table-card']");
+
+    @FindBy(xpath="//div[@class='oxd-table-card']")
+    public List<WebElement> table;
+
 }

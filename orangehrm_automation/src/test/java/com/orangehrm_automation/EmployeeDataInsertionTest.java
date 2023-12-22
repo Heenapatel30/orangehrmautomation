@@ -1,7 +1,10 @@
 package com.orangehrm_automation;
 
-import common.CommonFunction;
-import common.PropertyHandling;
+import com.orangehrm_automation.common.InsertData;
+import com.orangehrm_automation.pages.LogInPage;
+import com.orangehrm_automation.pages.PimModulePage;
+import com.orangehrm_automation.common.CommonFunction;
+import com.orangehrm_automation.common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,28 +14,29 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class EmployeeDataInsertion {
+public class EmployeeDataInsertionTest {
 
     WebDriver driver;
     PropertyHandling propertyHandling;
     LogInPage logInPage;
+
+    PimModulePage pimModulePage;
     @BeforeClass
     public void setUp() throws InterruptedException {
         propertyHandling = new PropertyHandling();
         driver=CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
         driver.manage().window().maximize();
-        logInPage = new LogInPage();
+        logInPage = new LogInPage(driver);
+        pimModulePage = new PimModulePage(driver);
         driver.get(propertyHandling.getProperty("url"));
         CommonFunction.elementToBeVisible(driver, logInPage.username);
-        driver.findElement(logInPage.username).sendKeys(propertyHandling.getProperty("username"));
-        driver.findElement(logInPage.password).sendKeys(propertyHandling.getProperty("password"));
-        driver.findElement(logInPage.logInButton).click();
-        CommonFunction.elementToBeVisible(driver,By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]"));
-        driver.findElement(By.xpath("//div[@class='oxd-sidepanel-body']//ul/li[2]")).click();
+        String username = propertyHandling.getProperty("username");
+        String password = propertyHandling.getProperty("password");
+        logInPage.login(username,password);
+        CommonFunction.elementToBeVisible(driver,pimModulePage.pimModule);
+        driver.findElement(pimModulePage.pimModule).click();
         Thread.sleep(2000);
     }
 
@@ -48,7 +52,7 @@ public class EmployeeDataInsertion {
 
     @DataProvider
     public Object[][] getEmployeeData(){
-       List<WebElement> rows = driver.findElements(By.xpath("//div[@class='oxd-table-card']"));
+       List<WebElement> rows = pimModulePage.table;
        Object[][] empDataObject = new Object[rows.size()][1];
 
        for (int i=1; i<=rows.size(); i++) {

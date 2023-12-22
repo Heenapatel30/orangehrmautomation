@@ -1,4 +1,4 @@
-package common;
+package com.orangehrm_automation.common;
 
 import org.testng.annotations.Test;
 

@@ -1,21 +1,20 @@
 package com.orangehrm_automation;
 
-import common.CommonFunction;
-import common.PropertyHandling;
+import com.orangehrm_automation.common.CommonFunction;
+import com.orangehrm_automation.common.InsertData;
+import com.orangehrm_automation.common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusDataInsertion {
+public class BusDataInsertionTest {
 
     WebDriver driver;
     PropertyHandling propertyHandling;
