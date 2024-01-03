@@ -6,6 +6,7 @@ import com.orangehrm_automation.common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -20,9 +21,12 @@ public class BusDataInsertionTest {
     PropertyHandling propertyHandling;
 
     @BeforeTest
-    public void setUp() throws InterruptedException {
+    public void setUp(ITestContext context) throws InterruptedException {
         propertyHandling = new PropertyHandling();
         driver = CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
+
+        context.setAttribute("WebDriver",driver);
+
         driver.manage().window().maximize();
         driver.navigate().to("https://www.redbus.in/");
         driver.findElement(By.xpath("//input[@id='src']")).sendKeys("pune");

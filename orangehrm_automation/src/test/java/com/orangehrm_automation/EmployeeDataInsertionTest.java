@@ -8,6 +8,7 @@ import com.orangehrm_automation.common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -26,9 +27,12 @@ public class EmployeeDataInsertionTest {
 
     PimModulePage pimModulePage;
     @BeforeClass
-    public void setUp() throws InterruptedException {
+    public void setUp(ITestContext context) throws InterruptedException {
         propertyHandling = new PropertyHandling();
         driver=CommonFunction.launchBrowser(propertyHandling.getProperty("browser"));
+
+        context.setAttribute("WebDriver",driver);
+
         driver.manage().window().maximize();
         logInPage = new LogInPage(driver);
         pimModulePage = new PimModulePage(driver);

@@ -1,15 +1,15 @@
 package com.orangehrm_automation.common;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.support.ui.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 public class CommonFunction {
@@ -56,6 +56,8 @@ public class CommonFunction {
           return webDriver.findElement(by);
       });
   }
+
+
 
 
 

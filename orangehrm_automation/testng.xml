@@ -4,8 +4,11 @@
         <listener class-name="com.orangehrm_automation.TestListeners"/>
     </listeners>
     <test name ="sanity">
-      <classes>
+        <packages>
+            <package name="com.orangehrm_automation"></package>
+        </packages>
+      <!--<classes>
           <class name="com.orangehrm_automation.ExcelHandlingTest"></class>
-      </classes>
+      </classes>-->
     </test>
 </suite>
