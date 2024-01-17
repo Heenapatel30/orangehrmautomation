@@ -7,6 +7,7 @@ import com.orangehrm_automation.common.CommonFunction;
 import com.orangehrm_automation.common.PropertyHandling;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -24,6 +25,8 @@ public class PimModuleTest {
     LogInPage logInPage;
 
     LogOutPage logOutPage;
+
+    Actions actions;
     @BeforeClass
     public void setUp(ITestContext context){
         propertyHandling = new PropertyHandling();
@@ -33,6 +36,7 @@ public class PimModuleTest {
         logInPage = new LogInPage(driver);
         pimModulePage = new PimModulePage(driver);
         logOutPage = new LogOutPage(driver);
+        actions = new Actions(driver);
 
         driver.manage().window().maximize();
         driver.get(propertyHandling.getProperty("url"));
@@ -64,9 +68,22 @@ public class PimModuleTest {
 
         driver.findElement(pimModulePage.employeeListButton).click();
 
-        CommonFunction.fluentWait(driver,pimModulePage.dashBoard);
-        driver.findElement(pimModulePage.dashBoard).click();
+    }
 
+    @Test
+    public void reportsLink() throws InterruptedException {
+        CommonFunction.elementToBeVisibleByElement(driver,pimModulePage.reportLink);
+        pimModulePage.reportLink.click();
+
+        CommonFunction.elementToBeVisibleByElement(driver, pimModulePage.reportName);
+        pimModulePage.reportName.sendKeys("Employee");
+        Thread.sleep(5000);
+
+        pimModulePage.searchButton.click();
+        actions.scrollByAmount(0,100).perform();
+        Thread.sleep(2000);
+
+        pimModulePage.resetButton.click();
     }
 
     @AfterClass

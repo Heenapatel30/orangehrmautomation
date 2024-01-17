@@ -1,5 +1,6 @@
 package com.orangehrm_automation.pages;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.FieldDocument;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,5 +36,17 @@ public class PimModulePage {
 
     @FindBy(xpath="//div[@class='oxd-table-card']")
     public List<WebElement> table;
+
+    @FindBy(xpath = "//nav[@class='oxd-topbar-body-nav']//li[4]")
+    public WebElement reportLink;
+
+    @FindBy(xpath = "//div[@class='oxd-autocomplete-wrapper']//input")
+    public WebElement reportName;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='oxd-form-actions']/button[1]")
+    public WebElement resetButton;
 
 }

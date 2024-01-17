@@ -27,6 +27,22 @@ public class AdminPage {
 
     public By searchButton = By.xpath("//button[@type='submit']");
 
+    public By jobButton = By.xpath("//nav[@class='oxd-topbar-body-nav']//li[2]");
+
+    public By jobTitleLink = By.xpath("//ul[@class='oxd-dropdown-menu']/li[1]");
+
+    public By addButton = By.xpath("//div[@class='orangehrm-header-container']//button");
+
+    public By jobTitleField = By.xpath("//div[@class='oxd-form-row'][1]//input");
+
+    public By saveButton = By.xpath("//button[@type='submit']");
+
+    public By userManagementLink = By.xpath("//div[@class='oxd-topbar-body']//li[1]");
+
+    public By userLink = By.xpath("//ul[@class='oxd-dropdown-menu']/li");
+
+
+
 
 
 
