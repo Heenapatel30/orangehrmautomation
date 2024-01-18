@@ -40,19 +40,21 @@ public class PimModuleTest {
 
         driver.manage().window().maximize();
         driver.get(propertyHandling.getProperty("url"));
-    }
-    @Test
-    public void logIn() throws InterruptedException, IOException {
+
         CommonFunction.elementToBeVisible(driver,logInPage.username);
         String username = propertyHandling.getProperty("username");
         String password = propertyHandling.getProperty("password");
         logInPage.login(username,password);
-       // CommonFunction.takeScreenShot(driver, "loginPage.png");
     }
+    /*@Test
+    public void logIn() throws InterruptedException, IOException {
+
+       // CommonFunction.takeScreenShot(driver, "loginPage.png");
+    }*/
 
     @Test
-    public void pimModuleClick() throws InterruptedException, IOException {
-        Thread.sleep(1000);
+    public void addEmployee() throws InterruptedException, IOException {
+       // Thread.sleep(1000);
 
         CommonFunction.elementToBeVisible(driver,pimModulePage.pimModule);
         driver.findElement(pimModulePage.pimModule).click();
@@ -67,6 +69,12 @@ public class PimModuleTest {
         Thread.sleep(2000);
 
         driver.findElement(pimModulePage.employeeListButton).click();
+
+        CommonFunction.elementToBeVisibleByElement(driver, pimModulePage.empId);
+        pimModulePage.empId.sendKeys("0038");
+        pimModulePage.empSearchButton.click();
+        actions.scrollByAmount(0,200).perform();
+        Thread.sleep(5000);
 
     }
 
@@ -85,6 +93,8 @@ public class PimModuleTest {
 
         pimModulePage.resetButton.click();
     }
+
+
 
     @AfterClass
     public void logOut(){

@@ -42,7 +42,64 @@ public class RecruitmentModulePage {
     public WebElement submitButton;
 
     @FindBy(xpath = "//nav[@class='oxd-topbar-body-nav']/ul/li[1]")
-    public WebElement canditatesButton;
+    public WebElement candidatesButton;
+
+    @FindBy(xpath = "//nav[@class='oxd-topbar-body-nav']//li[2]")
+    public WebElement vacanciesButton;
+
+    @FindBy(xpath = "//div[@class='oxd-form-row']/div/div[1]//div/div/div/div/div//i")
+    public WebElement jobTitle;
+
+    @FindBy(xpath = "//div[@role='option']/span")
+    public List<WebElement> jobTitleList;
+
+    @FindBy(xpath = "//div[@class='oxd-form-row']/div/div[2]//div/div/div/div/div//i")
+    public WebElement vacancy;
+
+    @FindBy(xpath = "//div[@role='option']/span")
+    public List<WebElement> vacancyList;
+
+    @FindBy(xpath = "//div[@class='oxd-form-row']/div/div[3]//div/div/div/div/div//i")
+    public WebElement hiringManager;
+
+    @FindBy(xpath = "//div[@role='option']")
+    public List<WebElement> hiringManagerList;
+
+    @FindBy(xpath = "//div[@class='oxd-form-row']/div/div[4]//div/div/div/div/div//i")
+    public WebElement status;
+
+    @FindBy(xpath = "//div[@role='option']/span")
+    public List<WebElement> statusList;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='oxd-form-actions']/button[@type='button']")
+    public WebElement resetButton;
+
+    @FindBy(xpath = "//div[@class='orangehrm-header-container']/button")
+    public WebElement addVacancyButton;
+
+    @FindBy(xpath = "//form[@class='oxd-form']/div[1]/div[1]//input")
+    public WebElement vacancyName;
+
+    @FindBy(xpath = "//form[@class='oxd-form']/div[1]/div[2]//i")
+    public WebElement jobTitles;
+
+    @FindBy(xpath = "//div[@role='option']/span")
+    public List<WebElement> jobTitlesList;
+
+    @FindBy(xpath = "//div[@class='oxd-autocomplete-wrapper']//input")
+    public WebElement hiringManagers;
+
+    @FindBy(xpath = "//button[@type ='submit']")
+    public WebElement saveButton;
+
+
+
+
+
+
 
 
 }

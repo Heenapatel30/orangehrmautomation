@@ -49,4 +49,10 @@ public class PimModulePage {
     @FindBy(xpath = "//div[@class='oxd-form-actions']/button[1]")
     public WebElement resetButton;
 
+    @FindBy(xpath = "//div[@class='oxd-grid-4 orangehrm-full-width-grid']/div[2]//input")
+    public WebElement empId;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement empSearchButton;
+
 }

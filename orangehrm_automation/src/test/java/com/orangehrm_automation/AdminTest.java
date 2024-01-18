@@ -77,6 +77,7 @@ public class AdminTest {
        CommonFunction.fluentWait(driver,adminPage.saveButton);
        driver.findElement(adminPage.saveButton).click();
 
+
        Thread.sleep(5000);
 
        driver.findElement(adminPage.userManagementLink).click();

@@ -24,6 +24,7 @@ public class RecruitmentModuleTest {
    RecruitmentModulePage recruitmentModulePage;
 
    LogOutPage logOutPage;
+    Actions actions;
 
     @BeforeClass
     public void logIn(ITestContext context){
@@ -36,6 +37,7 @@ public class RecruitmentModuleTest {
         logInPage = new LogInPage(driver);
         recruitmentModulePage = new RecruitmentModulePage(driver);
         logOutPage = new LogOutPage(driver);
+        actions = new Actions(driver);
 
         driver.get(propertyHandling.getProperty("url"));
 
@@ -49,7 +51,7 @@ public class RecruitmentModuleTest {
     }
 
     @Test
-    public void recruitmentModuleClick() throws InterruptedException {
+    public void addCandidates() throws InterruptedException {
         CommonFunction.elementToBeVisibleByElement(driver, recruitmentModulePage.addButton);
         recruitmentModulePage.addButton.click();
 
@@ -74,11 +76,121 @@ public class RecruitmentModuleTest {
         recruitmentModulePage.submitButton.click();
         Thread.sleep(2000);
 
-        recruitmentModulePage.canditatesButton.click();
-        Actions actions = new Actions(driver);
+        recruitmentModulePage.candidatesButton.click();
+
         actions.scrollByAmount(0,800).perform();
 
     }
+
+    @Test
+    public void searchVacancies() throws InterruptedException {
+        CommonFunction.elementToBeVisibleByElement(driver, recruitmentModulePage.vacanciesButton);
+        recruitmentModulePage.vacanciesButton.click();
+
+        CommonFunction.elementToBeVisibleByElement(driver, recruitmentModulePage.jobTitle);
+        recruitmentModulePage.jobTitle.click();
+
+        List<WebElement> jobTitlesList = recruitmentModulePage.jobTitleList;
+        Thread.sleep(2000);
+
+        for (WebElement element : jobTitlesList){
+
+            //System.out.println(jobTitle);
+            try {
+                String jobTitle  = element.getText();
+                if (jobTitle.equals("IT Manager")){
+                    element.click();
+                }
+            }catch (Exception e){
+
+            }
+
+        }
+
+        recruitmentModulePage.vacancy.click();
+        List<WebElement> vacanciesList = recruitmentModulePage.vacancyList;
+
+        for (WebElement element: vacanciesList){
+            try {
+                String vacancy = element.getText();
+                if (vacancy.equals("Associate IT Manager")){
+                    element.click();
+                }
+            }catch (Exception e){
+
+            }
+
+        }
+
+
+        recruitmentModulePage.hiringManager.click();
+        List<WebElement> hiringManagerList = recruitmentModulePage.hiringManagerList;
+
+        for (WebElement element : hiringManagerList){
+            try {
+                String hiringManger = element.getText();
+                if (hiringManger.equals("-- Select --")){
+                    element.click();
+                }
+            }catch (Exception e){
+
+            }
+
+        }
+
+        recruitmentModulePage.status.click();
+        List<WebElement> statusList = recruitmentModulePage.statusList;
+
+        for (WebElement element : statusList){
+            try {
+                String status = element.getText();
+                if (status.equals("Active")){
+                    element.click();
+                }
+            }catch (Exception e){
+
+            }
+
+        }
+
+        recruitmentModulePage.searchButton.click();
+
+        actions.scrollByAmount(0,200).perform();
+        Thread.sleep(2000);
+
+        recruitmentModulePage.resetButton.click();
+        Thread.sleep(2000);
+
+        CommonFunction.elementToBeVisibleByElement(driver,recruitmentModulePage.addVacancyButton);
+        recruitmentModulePage.addVacancyButton.click();
+
+        CommonFunction.elementToBeVisibleByElement(driver, recruitmentModulePage.vacancyName);
+        recruitmentModulePage.vacancyName.sendKeys("Associates IT");
+        recruitmentModulePage.jobTitles.click();
+        List<WebElement> jobTitleList = recruitmentModulePage.jobTitlesList;
+
+        for (WebElement element : jobTitleList){
+            try {
+                String title = element.getText();
+                if (title.equals("IT Manager")){
+                    element.click();
+                }
+            }catch (Exception e) {
+
+            }
+
+
+        }
+
+        recruitmentModulePage.hiringManagers.sendKeys("Linda");
+        Thread.sleep(3000);
+        recruitmentModulePage.saveButton.click();
+
+        Thread.sleep(5000);
+
+    }
+
+
 
     @AfterClass
     public void logOut(){
