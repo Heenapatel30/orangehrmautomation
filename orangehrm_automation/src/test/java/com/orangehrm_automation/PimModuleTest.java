@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -26,6 +27,8 @@ public class PimModuleTest {
 
     LogOutPage logOutPage;
 
+    //TestListeners testListeners;
+
     Actions actions;
     @BeforeClass
     public void setUp(ITestContext context){
@@ -41,10 +44,23 @@ public class PimModuleTest {
         driver.manage().window().maximize();
         driver.get(propertyHandling.getProperty("url"));
 
+        String expectedTitle = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
+
         CommonFunction.elementToBeVisible(driver,logInPage.username);
         String username = propertyHandling.getProperty("username");
         String password = propertyHandling.getProperty("password");
         logInPage.login(username,password);
+
+        String actualTitle = driver.getCurrentUrl();
+        System.out.println(actualTitle);
+
+        if (expectedTitle.equals(actualTitle)){
+            System.out.println(" Test case Passed");
+        }
+        else {
+            System.out.println(" Test case failed");
+            //testListeners.onTestFailure();
+        }
     }
     /*@Test
     public void logIn() throws InterruptedException, IOException {
