@@ -46,8 +46,8 @@ public class CommonFunction {
 
   public static void fluentWait(WebDriver driver,By by){
 
-      Wait<WebDriver> fluentWait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20))
-              .pollingEvery(Duration.ofSeconds(2))
+      Wait<WebDriver> fluentWait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(50))
+              .pollingEvery(Duration.ofSeconds(5))
               .ignoring(NoSuchElementException.class)
       ;
 
